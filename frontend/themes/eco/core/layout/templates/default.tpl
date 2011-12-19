@@ -1,93 +1,19 @@
 {include:core/layout/templates/head.tpl}
 
-<body class="{$LANGUAGE}">
-	<div id="topWrapper">
-		<header id="header">
-			<div class="container">
+<body>
+	<div id="container" class="fullWidth">
+		{* Header *}
+		{include:core/layout/templates/header.tpl}
 
-				{* Logo *}
-				<div id="logo">
-					<h2><a href="/">{$siteTitle}</a></h2>
-				</div>
+		{* Top wrapper *}
+		{include:core/layout/templates/top_wrapper.tpl}
 
-				{* Skip link *}
-				<div id="skip">
-					<p><a href="#main">{$lblSkipToContent|ucfirst}</a></p>
-				</div>
-
-				{* Navigation *}
-				<nav id="headerNavigation">
-					<h4>{$lblMainNavigation|ucfirst}</h4>
-					{$var|getnavigation:'page':0:1}
-				</nav>
-
-				{* Language *}
-				<nav id="headerLanguage">
-					<h4>{$lblLanguage|ucfirst}</h4>
-					{include:core/layout/templates/languages.tpl}
-				</nav>
-
-				{* Top position *}
-				{iteration:positionTop}
-					{$positionTop.blockContent}
-				{/iteration:positionTop}
-
-				{* Breadcrumb *}
-				<div id="breadcrumb">
-					<h4>{$lblBreadcrumb|ucfirst}</h4>
-					{include:core/layout/templates/breadcrumb.tpl}
-				</div>
-
-				{* Advertisement position *}
-				{iteration:positionAdvertisement}
-					{option:positionAdvertisement.blockIsHTML}
-						<div id="headerAd">
-							{$positionAdvertisement.blockContent}
-						</div>
-					{/option:positionAdvertisement.blockIsHTML}
-					{option:!positionAdvertisement.blockIsHTML}
-						{$positionAdvertisement.blockContent}
-					{/option:!positionAdvertisement.blockIsHTML}
-				{/iteration:positionAdvertisement}
-			</div>
-
-		</header>
-		<div id="main">
-			<div class="container">
-
-				{* Left column *}
-				<div class="col col-3">
-
-					{* Subnavigation *}
-					<nav class="sideNavigation">
-						<h4>{$lblSubnavigation|ucfirst}</h4>
-						{$var|getsubnavigation:'page':{$page.id}:2}
-					</nav>
-
-					{* Left position *}
-					{iteration:positionLeft}
-						{option:positionLeft.blockIsHTML}
-							<section class="mod">
-								<div class="inner">
-									<div class="bd content">
-										{$positionLeft.blockContent}
-									</div>
-								</div>
-							</section>
-						{/option:positionLeft.blockIsHTML}
-						{option:!positionLeft.blockIsHTML}
-							{$positionLeft.blockContent}
-						{/option:!positionLeft.blockIsHTML}
-					{/iteration:positionLeft}
-
-				</div>
-
-				{* Main column *}
-				<div class="col col-9 lastCol">
-
+		<div id="main" class="fullWidth">
+			<div class="inner twoColumns">
+				<div class="column">
 					{* Page title *}
 					{option:!hideContentTitle}
-						<header class="mainTitle">
+						<header class="pageTitle">
 							<h1>{$page.title}</h1>
 						</header>
 					{/option:!hideContentTitle}
@@ -95,40 +21,43 @@
 					{* Main position *}
 					{iteration:positionMain}
 						{option:positionMain.blockIsHTML}
-							<section class="mod">
-								<div class="inner">
-									<div class="bd content">
-										{$positionMain.blockContent}
-									</div>
-								</div>
-							</section>
+							{$positionMain.blockContent}
 						{/option:positionMain.blockIsHTML}
 						{option:!positionMain.blockIsHTML}
 							{$positionMain.blockContent}
 						{/option:!positionMain.blockIsHTML}
 					{/iteration:positionMain}
 
+					<noscript>
+						<div class="message notice">
+							<h4>{$lblEnableJavascript|ucfirst}</h4>
+							<p>{$msgEnableJavascript}</p>
+						</div>
+					</noscript>
+				</div>
+
+				<div class="narrowColumn">
+					{* Left position *}
+					{iteration:positionLeft}
+						{option:positionLeft.blockIsHTML}
+							{$positionLeft.blockContent}
+						{/option:positionLeft.blockIsHTML}
+						{option:!positionLeft.blockIsHTML}
+							{$positionLeft.blockContent}
+						{/option:!positionLeft.blockIsHTML}
+					{/iteration:positionLeft}
 				</div>
 			</div>
 		</div>
-		<noscript>
-			<div class="message notice">
-				<h4>{$lblEnableJavascript|ucfirst}</h4>
-				<p>{$msgEnableJavascript}</p>
-			</div>
-		</noscript>
 	</div>
-	<div id="bottomWrapper">
-		{include:core/layout/templates/footer.tpl}
-	</div>
+
+	{* Footer *}
+	{include:core/layout/templates/footer.tpl}
 
 	{* General Javascript *}
 	{iteration:jsFiles}
 		<script src="{$jsFiles.file}"></script>
 	{/iteration:jsFiles}
-
-	{* Theme specific Javascript *}
-	<script src="{$THEME_URL}/core/js/triton.js"></script>
 
 	{* Site wide HTML *}
 	{$siteHTMLFooter}
