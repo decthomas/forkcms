@@ -53,7 +53,11 @@
 					</ul>
 				</header>
 				<div class="bd content">
-					{option:items.image}<img src="{$FRONTEND_FILES_URL}/blog/images/source/{$items.image}" alt="{$items.title}" />{/option:items.image}
+					{option:items.image}
+						<div class="imageHolder">
+							<img src="{$FRONTEND_FILES_URL}/blog/images/source/{$items.image}" alt="{$items.title}" />
+						</div>
+					{/option:items.image}
 					{option:!items.introduction}{$items.text}{/option:!items.introduction}
 					{option:items.introduction}{$items.introduction}{/option:items.introduction}
 				</div>
