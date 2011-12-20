@@ -13,18 +13,15 @@ input.inputSearch,
 input.inputDate,
 textarea {
 	color: #666;
-	border-color: #999 #bbb #bbb #bbb;
+	border-color: #fff;
 	border-style: solid;
 	border-width: 1px;
-	padding: 3px 4px;
+	padding: 5px;
 	margin: 0;
-	background-color: #fff;
+	background-color: #e7e5de;
 	background-image: none;
-	background-image: -moz-linear-gradient(0% 3px 90deg,#fff, #cecece);
-	background-image: -webkit-gradient(linear, 0% 0%, 0% 3, from(#cecece), to(#fff));
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	background-image: -moz-linear-gradient(0% 3px 90deg,#e7e5de, #cecece);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 3, from(#cecece), to(#e7e5de));
 }
 
 textarea {
@@ -553,9 +550,6 @@ label,
 	-moz-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 	-webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 	position: relative;
 }
 
@@ -706,33 +700,23 @@ button,
 a.button,
 a.button:link,
 a.button:visited {
-	font: 700 11px/1.636 Arial, sans-serif;
-	color: #fff;
-	background: #366eac;
-	background: -moz-linear-gradient(top, #6facf1 0%, #366eac 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6facf1), color-stop(100%,#366eac));
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6FACF1', endColorstr='#366EAC',GradientType=0 )chroma(color=#000000);
-	border: 1px solid #366eac;
-	padding: 3px;
+	font-family: "Chunkfive", Georgia, serif;
+	font-size: 13px ;
+	color: #f0efd4;
+	background: #0d989e;
+	border: none;
+	padding: 8px 20px;
 	cursor: pointer;
 	overflow: visible;
 	white-space: nowrap;
 	text-align: center;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
 	margin: 0;
 }
 
 button::-moz-focus-inner{ padding: 0; border: 0 }
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	input.inputSubmit,
-	input.inputButton,
-	button {
-		padding: 2px 3px;
-	}
-}
 
 .ie6 input.inputSubmit,
 .ie6 input.inputButton,
@@ -761,10 +745,7 @@ button.buttonHover,
 a.button:hover,
 a.button:active,
 a.button:focus {
-	background: #2d5c91;
-	background: -moz-linear-gradient(top, #366eac 0%, #6facf1 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#366eac), color-stop(100%,#6facf1));
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#366EAC', endColorstr='#6FACF1',GradientType=0 )chroma(color=#000000);
+	background: #ef872b;
 }
 
 input.inputSubmit[disabled="disabled"],
