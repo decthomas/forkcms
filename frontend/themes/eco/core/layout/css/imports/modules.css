@@ -86,7 +86,7 @@
 			}
 
 		/* Article navigation */
-		
+
 		.footerNavigation:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; font-size: 0; line-height: 0; }
 		.ie6 .footerNavigation, .ie7 .footerNavigation { zoom: 1; }
 
@@ -235,3 +235,48 @@
 
 	.blogRecentArticlesWidget .ft .meta .archiveIcon { padding: 0 20px 0 22px; }
 	.blogRecentArticlesWidget .ft .meta .rssIcon { padding: 0 0 0 18px; }
+
+/* Blog archive widget */
+
+.blogArchiveWidget .bd li {
+	padding: 6px 0;
+	border-bottom: 1px dashed #9accd1;
+}
+
+	.blogArchiveWidget .bd li li {
+		padding: 0 0 0 25px;
+		background: url(../../images/list_arrow.png) no-repeat -578px 5px;
+		border-bottom: none;
+	}
+
+.blogArchiveWidget .bd .archiveIcon {
+	background: url(../../images/icons/archive.png) no-repeat 4px 8px;
+}
+
+	.blogArchiveWidget .bd .year {
+		font-family: "Chunkfive", Georgia, serif;
+		font-size: 16px;
+		text-transform: uppercase;
+		color: #a67c4d;
+		padding: 0 0 0 25px;
+	}
+
+		.blogArchiveWidget .bd .year a:link,
+		.blogArchiveWidget .bd .year a:visited {
+			color: #a67c4d;
+			border: none;
+		}
+
+		.blogArchiveWidget .bd .year a:hover,
+		.blogArchiveWidget .bd .year a:active,
+		.blogArchiveWidget .bd .year a:focus {
+			color: #6f9396;
+			border: none;
+		}
+
+		.blogArchiveWidget .bd li span {
+			font-family: Georgia, Times, serif;
+			font-style: italic;
+			font-size: 12px;
+			color: #9fa187;
+		}
