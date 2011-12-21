@@ -296,3 +296,11 @@
 .blogRelatedItems {
 	padding-bottom: 30px;
 }
+
+/*
+	Mailmotor
+*/
+
+.subscribeFormWidget .hd {
+	margin-bottom: 10px;
+}
