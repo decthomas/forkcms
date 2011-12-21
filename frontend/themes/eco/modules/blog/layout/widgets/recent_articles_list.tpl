@@ -32,5 +32,5 @@
 				</li>
 			</ul>
 		</footer>
-	</section>
+	</aside>
 {/option:widgetBlogRecentArticlesList}
