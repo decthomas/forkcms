@@ -350,3 +350,12 @@
 #searchFormWidget input.inputSubmit {
 	display: none;
 }
+
+/*
+	Tags
+*/
+
+.tagRelatedWidget .hd,
+.tagCloudWidget .hd {
+	margin-bottom: 10px;
+}
