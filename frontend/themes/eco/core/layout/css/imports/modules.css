@@ -304,3 +304,19 @@
 .subscribeFormWidget .hd {
 	margin-bottom: 10px;
 }
+
+/*
+	Search
+*/
+
+#searchIndex {
+	padding-bottom: 30px;
+}
+
+#searchResults .article {
+	padding-bottom: 20px;
+}
+
+	#searchResults .article h2 {
+		padding-bottom: 8px;
+	}
