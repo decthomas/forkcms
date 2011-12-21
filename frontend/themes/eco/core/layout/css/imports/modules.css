@@ -13,6 +13,10 @@
 	padding-bottom: 20px;
 }
 
+#blogDetail {
+	padding-bottom: 20px;
+}
+
 #blogDetail .article {
 	padding-bottom: 30px;
 }
@@ -125,7 +129,9 @@
 }
 
 	.comments .hd,
-	.commentForm .hd {
+	.commentForm .hd,
+	.blogRelatedItems .hd,
+	#faqOwnQuestionForm .hd {
 		background: url(../../images/divider_horizontal_stripe_dotted.png) repeat-x left bottom;
 		margin-bottom: 8px;
 	}
@@ -172,7 +178,8 @@
 
 /* Comments widget */
 
-.blogCommentsWidget li {
+.blogCommentsWidget li,
+.blogRecentArticlesListWidget li {
 	font-family: Georgia, Times, serif;
 	font-style: italic;
 	font-size: 12px;
@@ -182,7 +189,8 @@
 	border-bottom: 1px dashed #9accd1;
 }
 
-	.blogCommentsWidget li a {
+	.blogCommentsWidget li a,
+	.blogRecentArticlesListWidget li a {
 		font-family: Arial, sans-serif;
 		font-style: normal;
 		font-size: 13px;
@@ -280,3 +288,11 @@
 			font-size: 12px;
 			color: #9fa187;
 		}
+
+/*
+	FAQ
+*/
+
+.blogRelatedItems {
+	padding-bottom: 30px;
+}
