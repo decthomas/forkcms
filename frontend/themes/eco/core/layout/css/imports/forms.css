@@ -589,10 +589,7 @@ label,
 	.error {
 		border-color: #8b0800;
 		color: #fae7e6;
-		background-color: #d00c00;
-		background-image: none;
-		background-image: -moz-linear-gradient(0% 100% 90deg,#d00c00, #b80900);
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#b80900), to(#d00c00));
+		background: #b03115;
 	}
 
 	.error h1,
@@ -625,10 +622,7 @@ label,
 	.success {
 		border-color: #4c721f;
 		color: #f1f7eb;
-		background-color: #72aa2e;
-		background-image: none;
-		background-image: -moz-linear-gradient(0% 100% 90deg,#72aa2e, #65a01c);
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#65a01c), to(#72aa2e));
+		background: #75994d;
 	}
 
 	.success h1,
@@ -661,10 +655,7 @@ label,
 	.notice {
 		border-color: #e6901e;
 		color: #332d1c;
-		background-color: #ffe38a;
-		background-image: none;
-		background-image: -moz-linear-gradient(0% 100% 90deg,#ffe38a, #ffce58);
-		background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ffce58), to(#ffe38a));
+		background: #e5c250;
 	}
 
 	.notice h1,
