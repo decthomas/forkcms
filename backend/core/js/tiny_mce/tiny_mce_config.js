@@ -65,6 +65,11 @@ tinyMCE.init(
 			title: 'Basic table',
 			src: '/backend/core/js/tiny_mce/snippets/table.html',
 			description: 'Basic table'
+		},
+		{
+			title: 'Thumblist',
+			src: '/backend/core/js/tiny_mce/snippets/thumblist.html',
+			description: 'Thumblist'
 		}
 	],
 
