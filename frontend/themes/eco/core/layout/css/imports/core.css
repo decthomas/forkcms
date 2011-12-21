@@ -323,10 +323,12 @@ html, body { height: 100%; } /* Sticky footer fix */
 .thumbList:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; font-size: 0; line-height: 0; }
 .ie6 .thumbList, .ie7 .thumbList { zoom: 1; }
 
+.content .thumbList,
 .thumbList {
 	padding: 16px 0;
 }
 
+.content .thumbList li,
 .thumbList li {
 	width: 80px;
 	height: 102px;
@@ -337,6 +339,7 @@ html, body { height: 100%; } /* Sticky footer fix */
 	margin-right: 8px;
 }
 
+.content .thumbList .lastChild,
 .thumbList .lastChild {
 	margin-right: 0;
 }
