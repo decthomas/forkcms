@@ -320,3 +320,33 @@
 	#searchResults .article h2 {
 		padding-bottom: 8px;
 	}
+
+/* Search form widget */
+
+#searchFormWidget input.inputText {
+	width: 168px;
+	border-color: #928c85;
+	padding: 3px 26px 3px 4px;
+	background-color: #766b61;
+	background: url(../../images/icons/search.png) no-repeat;
+	background-image: url(../../images/icons/search.png), -moz-linear-gradient(0% 3px 90deg,#766b61, #695f56);
+	background-image: url(../../images/icons/search.png), -webkit-gradient(linear, 0% 0%, 0% 3, from(#695f56), to(#766b61));
+	background-position: 176px 4px, 0 0;
+	color: #fff;
+}
+
+#searchFormWidget input.inputText:focus {
+	background-color: #fff;
+	background-image: none;
+	background-image: url(../../images/icons/search.png), -moz-linear-gradient(0% 3px 90deg,#fff, #dedede);
+	background-image: url(../../images/icons/search.png), -webkit-gradient(linear, 0% 0%, 0% 3, from(#dedede), to(#fff));
+	background-position: 176px 4px, 0 0;
+	-webkit-box-shadow: 0 0 3px rgba(255,255,255,0.3);
+	   -moz-box-shadow: 0 0 3px rgba(255,255,255,0.3);
+	        box-shadow: 0 0 3px rgba(255,255,255,0.3);
+	color: #000;
+}
+
+#searchFormWidget input.inputSubmit {
+	display: none;
+}
