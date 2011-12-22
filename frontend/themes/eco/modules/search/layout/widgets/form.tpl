@@ -6,4 +6,4 @@
 			<input id="submit" class="inputSubmit" type="submit" name="submit" value="{$lblSearch|ucfirst}" />
 		</fieldset>
 	{/form:search}
-</dov>
+</div>
