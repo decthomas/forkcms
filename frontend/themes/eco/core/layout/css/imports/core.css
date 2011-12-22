@@ -178,7 +178,7 @@ html, body { height: 100%; } /* Sticky footer fix */
 }
 
 .ie6 #header, .ie7 #header, .ie8 #header {
-	background: url(../../images/bg_header_fallback.png) repeat-x center top;
+	background: url(../../images/bg_header_fallback.jpg) repeat-x center top;
 }
 
 	/* Logo */
