@@ -8,13 +8,12 @@
 	<thumbnail>thumbnail.png</thumbnail>
 	<description>
 		<![CDATA[
-			Triton is the default theme for Fork CMS and combines flexibility and scalability. Its clean design gives your content the canvas it deserves.
-			Triton is the perfect theme to get to know and explore what Fork CMS has to offer.
+			Eco is theme for Fork CMS designed by Veerle Pieters.
 		]]>
 	</description>
 	<authors>
 		<author>
-			<name>Thomas Deceuninck - development</name>
+			<name>Thomas Deceuninck - frontend</name>
 			<url>http://www.thomasdeceuninck.be</url>
 		</author>
 		<author>
@@ -26,33 +25,46 @@
 	<templates>
 		<template label="Default" path="core/layout/templates/default.tpl">
 			<positions>
-				<position name="main" />
-				<position name="left" />
 				<position name="top">
 					<defaults>
 						<widget module="search" action="form" />
 					</defaults>
 				</position>
-				<position name="advertisement" />
+				<position name="left" />
+				<position name="main" />
 			</positions>
 			<format>
-				[/,advertisement,advertisement,advertisement],[/,/,top,top],[/,/,/,/],[left,main,main,main]
+				[/,/,top],[left,main,main]
+			</format>
+		</template>
+		<template label="Subnavigation" path="core/layout/templates/subnav.tpl">
+			<positions>
+				<position name="top">
+					<defaults>
+						<widget module="search" action="form" />
+					</defaults>
+				</position>
+				<position name="left" />
+				<position name="main" />
+			</positions>
+			<format>
+				[/,/,top],[/,main,main],[left,main,main]
 			</format>
 		</template>
 		<template label="Home" path="core/layout/templates/home.tpl">
 			<positions>
-				<position name="main" />
-				<position name="left" />
-				<position name="right" />
 				<position name="top">
 					<defaults>
 						<widget module="search" action="form" />
 					</defaults>
 				</position>
-				<position name="advertisement" />
+				<position name="main" />
+				<position name="left" />
+				<position name="middle" />
+				<position name="right" />
 			</positions>
 			<format>
-				[/,advertisement,advertisement,advertisement],[/,/,top,top],[/,/,/,/],[main,main,main,main],[left,left,right,right]
+				[/,/,top],[main,main,main],[left,middle,right]
 			</format>
 		</template>
 	</templates>
