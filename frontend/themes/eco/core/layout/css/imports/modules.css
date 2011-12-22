@@ -355,7 +355,9 @@
 	Tags
 */
 
-.tagRelatedWidget .hd,
-.tagCloudWidget .hd {
-	margin-bottom: 10px;
+.tagRelatedWidget li,
+.tagCloudWidget li {
+	padding: 6px 8px 6px 26px;
+	background: url(../../images/icons/tags.png) no-repeat 4px 9px;
+	border-bottom: 1px dashed #9accd1;
 }
