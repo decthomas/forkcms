@@ -25,7 +25,7 @@
 	@import url("imports/general_purpose_classes.css");
 
 	/* jQuery UI */
-/*	@import url("imports/jquery_ui.css");*/
+	@import url("imports/jquery_ui.css");
 
 	/* Print */
 	@import url("imports/print.css");
