@@ -397,10 +397,21 @@ html, body { height: 100%; } /* Sticky footer fix */
 		.subnavigation .selected a:focus {
 			color: #ef872b;
 			border: none;
-			background-image: url(../../images/list_arrow.png), url(../../images/bg_subnavigation_selected.png);
-			background-repeat: no-repeat, repeat-y;
-			background-position: -590px 11px, left top;
+			background: url(../../images/list_arrow.png) no-repeat -590px 11px, url(../../images/bg_subnavigation_selected.png) repeat-y left top;
 			padding-left: 14px;
+		}
+
+		.ie7 .subnavigation .selected a:link,
+		.ie7 .subnavigation .selected a:visited,
+		.ie7 .subnavigation .selected a:hover,
+		.ie7 .subnavigation .selected a:active,
+		.ie7 .subnavigation .selected a:focus,
+		.ie8 .subnavigation .selected a:link,
+		.ie8 .subnavigation .selected a:visited,
+		.ie8 .subnavigation .selected a:hover,
+		.ie8 .subnavigation .selected a:active,
+		.ie8 .subnavigation .selected a:focus {
+			background: url(../../images/list_arrow.png) no-repeat -590px 11px;
 		}
 
 /* Widgets */

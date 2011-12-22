@@ -29,9 +29,7 @@
 	}
 
 	#blogIndex .article .hd {
-		background-image: url(../../images/divider_horizontal_stripe_dotted.png), url(../../images/bg_meta.png);
-		background-repeat: repeat-x, no-repeat;
-		background-position: left bottom, right bottom;
+		background: url(../../images/divider_horizontal_stripe_dotted.png) repeat-x left bottom, url(../../images/bg_meta.png) no-repeat right bottom;
 	}
 
 		.article h1 {
@@ -40,10 +38,6 @@
 
 		.article h2 {
 			padding-bottom: 3px;
-		}
-
-		#blogIndex .hd .meta {
-			background: url(../../images/bg_meta.png) no-repeat right bottom;
 		}
 
 	/* Bd */
