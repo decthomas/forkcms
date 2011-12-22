@@ -12,7 +12,7 @@
 			<div class="inner twoColumns">
 				<div class="eyecatcher">
 					<div class="bigImageHolder">
-						<img src="images/content/home.jpg" alt="" />
+						<img src="{$THEME_URL}/core/layout/images/home_placeholder.jpg" alt="Placeholder" />
 					</div>
 
 					<div class="content">
