@@ -348,6 +348,16 @@
 	color: #000;
 }
 
+.ie7 #searchFormWidget input.inputText,
+.ie8 #searchFormWidget input.inputText {
+	background: #776c62 url(../../images/icons/search.png) no-repeat 176px 4px;
+}
+
+.ie7 #searchFormWidget input.inputText:focus,
+.ie8 #searchFormWidget input.inputText:focus {
+	background-color: #fff;
+}
+
 #searchFormWidget input.inputSubmit {
 	display: none;
 }
