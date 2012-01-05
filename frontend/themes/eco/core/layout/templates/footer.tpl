@@ -2,8 +2,8 @@
 	<div class="inner">
 		<ul class="floatLeft">
 			<li>&copy; {$now|date:'Y'} {$siteTitle}</li>
-			<li class="icon addressIcon">Warandestraat 38 &middot; 1000 Brussel</li>
-			<li class="icon phoneIcon">02/742 23 48</li>
+			{*<li class="icon addressIcon">Warandestraat 38 &middot; 1000 Brussel</li>
+			<li class="icon phoneIcon">02/742 23 48</li>*}
 		</ul>
 		<ul class="floatRight">
 			{iteration:footerLinks}
