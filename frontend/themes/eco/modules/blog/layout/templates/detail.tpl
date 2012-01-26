@@ -112,7 +112,8 @@
 			{option:commentIsInModeration}<div class="message warning"><p>{$msgBlogCommentInModeration}</p></div>{/option:commentIsInModeration}
 			{option:commentIsSpam}<div class="message error"><p>{$msgBlogCommentIsSpam}</p></div>{/option:commentIsSpam}
 			{option:commentIsAdded}<div class="message success"><p>{$msgBlogCommentIsAdded}</p></div>{/option:commentIsAdded}
-			{form:comment}
+
+			{form:commentsForm}
 				<p class="bigInput{option:txtAuthorError} errorArea{/option:txtAuthorError}">
 					<label for="author">{$lblName|ucfirst}<abbr title="{$lblRequiredField}">*</abbr></label>
 					{$txtAuthor} {$txtAuthorError}
@@ -132,7 +133,7 @@
 				<p>
 					<input class="inputSubmit" type="submit" name="comment" value="{$msgComment|ucfirst}" />
 				</p>
-			{/form:comment}
+			{/form:commentsForm}
 		</section>
 	{/option:item.allow_comments}
 </div>
