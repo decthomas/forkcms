@@ -37,6 +37,10 @@
 				</div>
 
 				<div class="narrowColumn">
+					<nav class="subnavigation">
+						{$var|getsubnavigation:'page':{$page.id}:2}
+					</nav>
+
 					{* Left position *}
 					{iteration:positionLeft}
 						{option:positionLeft.blockIsHTML}

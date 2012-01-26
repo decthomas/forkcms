@@ -8,7 +8,7 @@
 		{* Top wrapper *}
 		{include:core/layout/templates/top_wrapper.tpl}
 
-		<div id="main" class="fullWidth hasSubnavigation">
+		<div id="main" class="fullWidth narrow">
 			<div class="inner twoColumns">
 				<div class="column">
 					{* Page title *}

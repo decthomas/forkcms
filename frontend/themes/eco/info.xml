@@ -3,22 +3,23 @@
 	<name>Eco</name>
 	<version>1.0.0</version>
 	<requirements>
-		<minimum_version>3.0.0</minimum_version>
+		<minimum_version>3.3.0</minimum_version>
 	</requirements>
 	<thumbnail>thumbnail.png</thumbnail>
 	<description>
 		<![CDATA[
-			Eco is theme for Fork CMS designed by Veerle Pieters.
+			Inspired by the environmental challenges the world is currently facing, Veerle Pieter
+			designed a Fork CMS theme that breathes nature.
 		]]>
 	</description>
 	<authors>
 		<author>
-			<name>Thomas Deceuninck - frontend</name>
-			<url>http://www.thomasdeceuninck.be</url>
+			<name>Veerle Pieters</name>
+			<url>http://veerle.duoh.com</url>
 		</author>
 		<author>
-			<name>Veerle Pieters - design</name>
-			<url>http://veerle.duoh.com</url>
+			<name>Thomas Deceuninck</name>
+			<url>http://www.thomasdeceuninck.be</url>
 		</author>
 	</authors>
 	<metanavigation supported="false" />
@@ -34,10 +35,10 @@
 				<position name="main" />
 			</positions>
 			<format>
-				[/,/,top],[left,main,main]
+				[/,/,top],[/,main,main],[left,main,main]
 			</format>
 		</template>
-		<template label="Subnavigation" path="core/layout/templates/subnav.tpl">
+		<template label="Narrow column" path="core/layout/templates/narrow.tpl">
 			<positions>
 				<position name="top">
 					<defaults>
@@ -48,7 +49,7 @@
 				<position name="main" />
 			</positions>
 			<format>
-				[/,/,top],[/,main,main],[left,main,main]
+				[/,/,/,top],[/,main,main,main],[left,main,main,main]
 			</format>
 		</template>
 		<template label="Home" path="core/layout/templates/home.tpl">
