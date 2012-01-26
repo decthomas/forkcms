@@ -22,10 +22,12 @@
 							{* In the category *}
 							{$lblIn} {$lblThe} {$lblCategory}
 						</li>
+
 						<li class="icon categoryIcon">
 							{* Category *}
 							<a href="{$widgetBlogRecentArticlesFull.category_full_url}" title="{$widgetBlogRecentArticlesFull.category_title}">{$widgetBlogRecentArticlesFull.category_title}</a>.
 						</li>
+
 						<li class="icon commentsIcon">
 							{* Comments *}
 							{option:!widgetBlogRecentArticlesFull.comments}
@@ -49,7 +51,7 @@
 					</ul>
 				</header>
 				<div class="bd content">
-{option:!widgetBlogRecentArticlesFull.introduction}{$widgetBlogRecentArticlesFull.text}{/option:!widgetBlogRecentArticlesFull.introduction}
+					{option:!widgetBlogRecentArticlesFull.introduction}{$widgetBlogRecentArticlesFull.text}{/option:!widgetBlogRecentArticlesFull.introduction}
 					{option:widgetBlogRecentArticlesFull.introduction}{$widgetBlogRecentArticlesFull.introduction}{/option:widgetBlogRecentArticlesFull.introduction}
 				</div>
 			</article>
