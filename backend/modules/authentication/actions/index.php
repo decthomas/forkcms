@@ -29,8 +29,7 @@ class BackendAuthenticationIndex extends BackendBaseActionIndex
 		// check if the user is really logged on
 		if(BackendAuthentication::getUser()->isAuthenticated())
 		{
-			$redirectURL = $this->getParameter('querystring', 'string', BackendModel::createUrlForAction(null, 'dashboard'));
-			$this->redirect($redirectURL);
+			$this->redirect($this->getParameter('querystring', 'string', BackendModel::createUrlForAction(null, 'dashboard')));
 		}
 
 		parent::execute();
@@ -58,6 +57,11 @@ class BackendAuthenticationIndex extends BackendBaseActionIndex
 	 */
 	public function parse()
 	{
+		parent::parse();
+
+		// assign the interface language ourself, because it won't be assigned automagically
+		$this->tpl->assign('INTERFACE_LANGUAGE', BackendLanguage::getInterfaceLanguage());
+
 		$this->frm->parse($this->tpl);
 		$this->frmForgotPassword->parse($this->tpl);
 	}
@@ -73,8 +77,14 @@ class BackendAuthenticationIndex extends BackendBaseActionIndex
 			$txtPassword = $this->frm->getField('backend_password');
 
 			// required fields
-			$txtEmail->isFilled(BL::err('EmailIsRequired'));
-			$txtPassword->isFilled(BL::err('PasswordIsRequired'));
+			if(!$txtEmail->isFilled() || !$txtPassword->isFilled())
+			{
+				// add error
+				$this->frm->addError('fields required');
+
+				// show error
+				$this->tpl->assign('hasError', true);
+			}
 
 			// invalid form-token?
 			if($this->frm->getToken() != $this->frm->getField('form_token')->getValue())
@@ -152,11 +162,8 @@ class BackendAuthenticationIndex extends BackendBaseActionIndex
 				// loop through modules and break on first allowed module
 				foreach($modules as $module) if(BackendAuthentication::isAllowedModule($module)) break;
 
-				// get the redirect-URL from the URL
-				$redirectURL = $this->getParameter('querystring', 'string', BackendModel::createUrlForAction(null, $module));
-
 				// redirect to the correct URL (URL the user was looking for or fallback)
-				$this->redirect($redirectURL);
+				$this->redirect($this->getParameter('querystring', 'string', BackendModel::createUrlForAction(null, $module)));
 			}
 		}
 
@@ -189,7 +196,7 @@ class BackendAuthenticationIndex extends BackendBaseActionIndex
 				$variables['resetLink'] = SITE_URL . BackendModel::createURLForAction('reset_password') . '&email=' . $email . '&key=' . $key;
 
 				// send e-mail to user
-				BackendMailer::addEmail(ucfirst(BL::msg('ResetYourPasswordMailSubject')), BACKEND_MODULE_PATH . '/layout/templates/mails/reset_password.tpl', $variables, $email);
+				BackendMailer::addEmail(SpoonFilter::ucfirst(BL::msg('ResetYourPasswordMailSubject')), BACKEND_MODULE_PATH . '/layout/templates/mails/reset_password.tpl', $variables, $email);
 
 				// clear post-values
 				$_POST['backend_email_forgot'] = '';

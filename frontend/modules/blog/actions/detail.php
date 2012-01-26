@@ -107,7 +107,7 @@ class FrontendBlogDetail extends FrontendBaseBlock
 	private function loadForm()
 	{
 		// create form
-		$this->frm = new FrontendForm('comment');
+		$this->frm = new FrontendForm('commentsForm');
 		$this->frm->setAction($this->frm->getAction() . '#' . FL::act('Comment'));
 
 		// init vars
@@ -144,7 +144,7 @@ class FrontendBlogDetail extends FrontendBaseBlock
 		if(FrontendModel::getModuleSetting('core', 'facebook_admin_ids', null) !== null || FrontendModel::getModuleSetting('core', 'facebook_app_id', null) !== null)
 		{
 			// add specified image
-			$this->header->addOpenGraphImage(FRONTEND_FILES_URL . '/blog/images/source/' . $this->record['image']);
+			if(isset($this->record['image']) && $this->record['image'] != '') $this->header->addOpenGraphImage(FRONTEND_FILES_URL . '/blog/images/source/' . $this->record['image']);
 
 			// add images from content
 			$this->header->extractOpenGraphImages($this->record['text']);
@@ -171,6 +171,8 @@ class FrontendBlogDetail extends FrontendBaseBlock
 		// advanced SEO-attributes
 		if(isset($this->record['meta_data']['seo_index'])) $this->header->addMetaData(array('name' => 'robots', 'content' => $this->record['meta_data']['seo_index']));
 		if(isset($this->record['meta_data']['seo_follow'])) $this->header->addMetaData(array('name' => 'robots', 'content' => $this->record['meta_data']['seo_follow']));
+
+		$this->header->setCanonicalUrl(FrontendNavigation::getURLForBlock('blog', 'detail') . '/' . $this->record['url']);
 
 		// assign article
 		$this->tpl->assign('item', $this->record);

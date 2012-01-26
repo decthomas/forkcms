@@ -17,6 +17,7 @@
  * @author Davy Hellemans <davy.hellemans@netlash.com>
  * @author Tijs Verkoyen <tijs@sumocoders.be>
  * @author Dieter Vanden Eynde <dieter@dieterve.be>
+ * @author Jelmer Snoeck <jelmer.snoeck@netlash.com>
  */
 class BackendDataGrid extends SpoonDataGrid
 {
@@ -56,7 +57,7 @@ class BackendDataGrid extends SpoonDataGrid
 			$this->setColumnHeaderAttributes($column, array('class' => $column));
 
 			// set default label
-			$this->setHeaderLabels(array($column => ucfirst(BL::lbl(SpoonFilter::toCamelCase($column)))));
+			$this->setHeaderLabels(array($column => SpoonFilter::ucfirst(BL::lbl(SpoonFilter::toCamelCase($column)))));
 		}
 
 		// set paging class
@@ -94,7 +95,7 @@ class BackendDataGrid extends SpoonDataGrid
 		if(in_array($name, array('use_revision', 'use_draft')))
 		{
 			// rebuild value, it should have special markup
-			$value = '<a href="' . $URL . '" class="button icon' . SpoonFilter::toCamelCase($name) . '">
+			$value = '<a href="' . $URL . '" class="button linkButton icon iconEdit icon' . SpoonFilter::toCamelCase($name) . '">
 						<span>' . $value . '</span>
 					</a>';
 
@@ -158,6 +159,26 @@ class BackendDataGrid extends SpoonDataGrid
 	}
 
 	/**
+	 * Enable the grey out functionallity. This will see if we have a column that matches our set.
+	 * If so, it will call the BackendDatagridFunction with the type and value so we can parse the data.
+	 */
+	public function enableGreyingOut()
+	{
+		$allowedColumns = array('hidden', 'visible', 'active', 'published');
+		$allColumns = $this->getColumns();
+
+		foreach($allowedColumns as $column)
+		{
+			// we have a match, set the row function
+			if(array_search($column, $allColumns) !== false)
+			{
+				$this->setColumnHidden($column);
+				$this->setRowFunction(array('BackendDatagridFunctions', 'greyOut'), array($column, '[' . $column . ']'), array($column));
+			}
+		}
+	}
+
+	/**
 	 * Enable drag and drop for the current datagrid
 	 */
 	public function enableSequenceByDragAndDrop()
@@ -196,6 +217,13 @@ class BackendDataGrid extends SpoonDataGrid
 
 		// has paging & more than 1 page
 		elseif($this->getPaging() && $this->getNumResults() > $this->getPagingLimit()) $this->tpl->assign('footer', true);
+
+		// set the odd and even classes
+		$this->setOddRowAttributes(array('class' => 'odd'));
+		$this->setEvenRowAttributes(array('class' => 'even'));
+
+		// enable greying out
+		$this->enableGreyingOut();
 
 		// execute parent
 		return parent::getContent();
@@ -257,7 +285,7 @@ class BackendDataGrid extends SpoonDataGrid
 				$id = 'confirm-' . (string) $uniqueId;
 
 				// set title if there wasn't one provided
-				if($title === null) $title = ucfirst(BL::lbl('Delete') . '?');
+				if($title === null) $title = SpoonFilter::ucfirst(BL::lbl('Delete') . '?');
 
 				// grab current value
 				$value = $this->columns[$column]->getValue();
@@ -331,13 +359,13 @@ class BackendDataGrid extends SpoonDataGrid
 	public function setMassAction(SpoonFormDropdown $actionDropDown)
 	{
 		// buid HTML
-		$HTML = '<p><label for="' . $actionDropDown->getAttribute('id') . '">' . ucfirst(BL::lbl('WithSelected')) . '</label></p>
+		$HTML = '<p><label for="' . $actionDropDown->getAttribute('id') . '">' . SpoonFilter::ucfirst(BL::lbl('WithSelected')) . '</label></p>
 				<p>
 					' . $actionDropDown->parse() . '
 				</p>
 				<div class="buttonHolder">
 					<a href="#" class="submitButton button">
-						<span>' . ucfirst(BL::lbl('Execute')) . '</span>
+						<span>' . SpoonFilter::ucfirst(BL::lbl('Execute')) . '</span>
 					</a>
 				</div>';
 
@@ -792,18 +820,48 @@ class BackendDataGridFunctions
 		// get settings
 		$avatar = $user->getSetting('avatar', 'no-avatar.gif');
 		$nickname = $user->getSetting('nickname');
+		$allowed = BackendAuthentication::isAllowedAction('edit', 'users');
 
 		// build html
 		$html = '<div class="dataGridAvatar">' . "\n";
 		$html .= '	<div class="avatar av24">' . "\n";
-		$html .= '		<a href="' . BackendModel::createURLForAction('edit', 'users') . '&amp;id=' . $id . '">' . "\n";
+		if($allowed) $html .= '		<a href="' . BackendModel::createURLForAction('edit', 'users') . '&amp;id=' . $id . '">' . "\n";
 		$html .= '			<img src="' . FRONTEND_FILES_URL . '/backend_users/avatars/32x32/' . $avatar . '" width="24" height="24" alt="' . $nickname . '" />' . "\n";
-		$html .= '		</a>' . "\n";
+		if($allowed) $html .= '		</a>' . "\n";
 		$html .= '	</div>';
 		$html .= '	<p><a href="' . BackendModel::createURLForAction('edit', 'users') . '&amp;id=' . $id . '">' . $nickname . '</a></p>' . "\n";
 		$html .= '</div>';
 
 		return $html;
+	}
+
+	/**
+	 * This will grey out certain rows from comon columns. These columns are:
+	 *
+	 * 'visible', 'hidden', 'active', 'published'
+	 *
+	 * @param string $type The type of column. This is given since some columns can have different meanings than others.
+	 * @param string $value
+	 * @param array $attributes
+	 */
+	public static function greyOut($type, $value, array $attributes = array())
+	{
+		// the base class
+		$grayedOutClass = 'grayedOut';
+
+		switch($type)
+		{
+			case 'visible':
+			case 'active':
+			case 'published':
+				if($value == 'N') return array('class' => $grayedOutClass);
+				break;
+			case 'hidden':
+				if($value == 'Y') return array('class' => $grayedOutClass);
+				break;
+		}
+
+		return array();
 	}
 
 	/**

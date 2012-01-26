@@ -1,8 +1,196 @@
-3.1.3 (xxxx-xx-xx)
+3.2.3 (xxxx-xx-xx)
+--
+Bugfixes:
+
+* Core: snippets: made the languages to get the templates for dynamic.
+* Blog: fixed improper redirect that caused blog archive pagination to malfunction.
+
+
+3.2.2 (2012-01-24)
+--
+Improvements:
+
+* Core: added an isPrice filter, also for text fields.
+* Core: added the text color for the hover states of buttons.
+* Core: when a datagrid column has a certain column title(hidden, visible, published, active), the datagrid will now automatically detect non-visible rows and mark them this way.
+* Core: init Facebook for its JS SDK when an admin or app id is set.
+* API: Added API::isValidRequestMethod($method) that checks if the request method of an incoming API call is valid for a given API method'.
+* Analytics: Fixed the cronjobs execution time, should only run once a day.
+* Blog, content blocks, pages: replaced the buttons for the use of versions or drafts by links with icons for consistency.
+* Blog: API methods are now limited to their correct request methods.
+* Extensions: improved the validation of the positions, as mention on http://forkcms.lighthouseapp.com/projects/61890/tickets/256 by Dieter W.
+* Formbuilder: altered the splitchar, so "," can be used in values for dropdowns, checkboxes or radiobuttons.
+* Pages: editor will be larger by default.
+* Search: use a saveIndex function instead of addIndex and editIndex.
+
+Bugfixes:
+
+* Core: module specific locale are now parsed in the templates when used in cronjobs, thanks to annelyze.
+* Core: Click To Edit above the editor should behave from now on.
+* Core: added the options for the theme-specific editor_content.css and and screen.css that will be loaded in the editor.
+* Analytics: Fixed the labels for keywords and referrers when updating through ajax.
+* Extensions: Made clear in cronjob info text that cronjob execution times have to be spread on servers with multiple fork installations.
+* Extensions: a notice was triggered when using invalid templatesyntax, as mentioned on http://forkcms.lighthouseapp.com/projects/61890/tickets/257.
+* Mailmotor: improve visibility of ckeditor in mailmotor.
+
+
+3.2.1 (2012-01-17)
+--
+Improvements:
+
+* Core: upgraded jQueryUI to 1.8.17
+* Core: added a generic method to output CSV-files, which uses the user-settings for splitchar and line-ending.
+* Core: it is now possible to set an empty string as recipient name in the mailers.
+* Extensions: only modules with a valid name will be included in the list of installable modules.
+* Blog: added an option for the god user to enable or disable the upload image functionallity for the blog module.
+* Installer: added a check for subfolders.
+* All: template-options for available actions are now available for all modules and thus also prefixed with the modulename.
+
+Bugfixes:
+
+* Core: added missing locale for ckeditor & ckfinder.
+* Core: when not in debugmode the dialog-patch wasn't included in the minified JS-file.
+* Pages: fixed reset previous value when editing editor block.
+* Spoon: when deleting a cookie we now set the expiration date far in the past to prevent that users with an incorrect system time can still use deleted cookies.
+* API: all illegal characters are now wrapped with CDATA tags.
+* Blog: API calls now show the most recent version of a blog title.
+
+
+3.2.0 (2012-01-10)
+--
+Improvements:
+
+* Core: integrated CKEditor into Fork CMS.
+* Core: added an extra check (parent has to be td.checkbox) for the row selection within tables in the backend.
+* Core: added cookie containing unique visitor id.
+* Core: add a class 'noSelectedState' to the table of a dataGrid to prevent the selected state to show for every row in the datagrid with a checked checkbox.
+* Core: added maxItems and afterAdd options for the multipleSelectbox.
+* Core: added a possibility to add an extra to all pages when installing forkcms with the installer function addDefaultExtra. The extra will be added to all pages without this extra.
+* Core: you can now add items to the search index in the installer of your module.
+* Core: fixed core engine url notice in frontend/ and backend/ (Notice: Undefined offset: 1) by removing an unused $get var.
+* Pages: when adding an editor field, the editor will immediately open.
+* Pages: the sitemap now correctly displays subpages.
+* Extensions: modules may now also include files in /library/external. 
+* All: actions where the user has no rights for, are no longer shown.
+
+Bugfixes:
+
+* Core: fixed core template override from within module action.
+* Core: added #xfbml=1 to the Facebook connect URL so Facebook plugins also work when there's no Facebook app id given in the settings tab.
+* ContentBlocks: Fixed a bug where a hidden content block assigned to a page would trigger a PHP Notice.
+* Extensions: fixed module-warnings system.
+* Extensions: fixed module upload.
+* Users: Fixed a bug that was triggered when editing a user that was not the loggedin user and when the loggedin user was not a god user.
+* Spoon: dropdown opt-group's values were reset by the array_merge function.
+
+
+3.1.9 (2012-01-03)
+--
+Improvements:
+
+* Core: the frontend CSS-minifier supports @import-statements from now on.
+* Core: you can't select redirect-languages that aren't active.
+
+Bugfixes:
+
+* Blog: meta should be deleted before the items are deleted.
+
+
+3.1.8 (2011-12-27)
+--
+Improvements:
+
+* Core: added public methods to FrontendPage to fetch page id & page record.
+* Core: split instantiation & execution of extras, allowing extra's to be aware of other extra's on a page.
+* All: fixed a lot of <label>-tags, which improves the accessibility.
+* All: added some hidden labels for formelements that doesn't have a <label>-tag linked, which improves the accessibility.
+* Authentication: don't mention which field is required seperatly.
+* Core: no more need to use the addslashes-modifier in JS-files, it will be handled by Fork. Introduced while fixing the bug mentioned by Tristan Charbonnier on http://forkcms.lighthouseapp.com/projects/61890/tickets/249.
+* Core: added a generic class that will enable you to use iCal-feeds.
+
+Bugfixes:
+
+* Core: confirmmessages weren't working anymore, as Samuel Debruyn mentioned on http://forkcms.lighthouseapp.com/projects/61890/tickets/251
+* Extensions: when a templates was edited and an form-error was shown the added blocks weren't shown correctly again.
+* Tags: related widget wasn't using the current language, patch provided by czytom on http://forkcms.lighthouseapp.com/projects/61890/tickets/243
+* Tags: the url for a tag that contains spaces wasn't calculated correctly, mentioned by czytom on http://forkcms.lighthouseapp.com/projects/61890/tickets/244
+* Mailmotor: also replace https while linking the account
+* Formbuilder: changing the value of the submitbutton wasn't working, mentioned by phill on http://forkcms.lighthouseapp.com/projects/61890/tickets/252.
+* Installer: show the warning when library/external is not readable.
+
+
+3.1.7 (2011-12-20)
+--
+Improvements:
+
+* Core: tableSequenceByDragAndDrop allows the module to be chosen, so sequences from other modules might be used.
+* Tags: tagpages don't have any SEO-value, so don't index them.
+* Core: created multibyte-safe ucfirst variant and applied it throughout Fork CMS.
+
+Bugfixes:
+
+* Core: fixed XSS vulnerability (as mentioned on: http://packetstormsecurity.org/files/107815/forkcms-xss.txt)
+* Core: fixed page-unload warning on IE.
+* Core: it is now possible to use translations that don't exist in English.
+
+
+3.1.6 (2011-12-13)
+--
+Improvements:
+
+* Core: when not in debugmode non-existing files or faulty urls shouldn't trigger an exception but a 404.
+* Core: added an getModules method to FrontendModule, analog to the backend method.
+* Core: the direct actions are no longer shown in the navigation.
+* Core: don't add a timestamp to the urls of well known libraries in the backend.
+* Core: automagic canonical-urls.
+* Core: added a new modifier stripnewlines which will remove all newlines in a string, so JS can handle it. 
+* Core: added schema.org properties in the default HTML and in the Triton-theme.
+* Locale: added some missing locale, thx to wouter H, http://forkcms.lighthouseapp.com/projects/61890/tickets/237
+* Locale: the missing items are now sorted by application, type, module and name.
+* Locale: added translations for Spanish (by Alberto Aguayo - http://www.bikumo.com)
+* Location: rewrote most of the JS, because the map wasn't showing the markers correctly, as mentioned by Wouter H on http://forkcms.lighthouseapp.com/projects/61890/tickets/238
+
+Bugfixes:
+
+* Pages: default blocks now apply correctly on new pages.
+* Pages: removed extras still linked to page now no longer trigger an error.
+* Core: settings exclude & checked values on setMassActionCheckboxes now works again.
+* Formbuilder: fixed a typo, as mentioned by Tommy Van de Velde on http://forkcms.lighthouseapp.com/projects/61890/tickets/239.
+* Core: when adding a JS-file with a ? in it the timestamp was appended with a ?.
+* Locale: improved translations for German (by Philipp Kruft - http://www.novacore.de)
+
+
+3.1.5 (2011-12-06)
+--
+Bugfixes:
+
+* Analytics: when refreshing the traffic sources a parseerror was thrown, as reported by Wouter H. on http://forkcms.lighthouseapp.com/projects/61890/tickets/231 
+
+
+3.1.4 (2011-11-29)
+--
+Improvements:
+
+* Core: upgraded jQuery to 1.7.1  
+* Core: upgraded jQuery Tools to 1.2.6
+* Core: direct action pages get prefilled meta information again.
+* Users: when adding a user and there is only one group it will be checked by default.
+
+Bugfixes:
+
+* Profiles: display name was not being urilized.
+* Tags: it is no longer impossible to fetch related items with the same id as your source item.
+* Core: fixed js issue in triton.
+* Core: fixed a typo, thx to Danny Korpan.
+* Extensions: when using spaces in the format-part of the template XML, the templates weren't build correctly.
+
+
+3.1.3 (2011-11-22)
 --
 Improvements:
 
 * Added the possibility to easily adjust detailed page settings when you are a god user.
+* SVN folders will now be skipped when running the remove_cache script.
 
 Bugfixes:
 
@@ -20,6 +208,7 @@ Bugfixes:
 * Core: upgraded the YUI-compressor to 2.4.7, see https://github.com/yui/yuicompressor/blob/master/doc/CHANGELOG.
 * Core: javascript error fixed when no href is provided in the share widget.
 * Core: fixed confirmation-dialog, wasn't closing when the cancel-button was clicked.
+* Tools: frontend and backend globals were not deleted when running prepare_for_reinstall.
 
 
 3.1.2 (2011-11-15)

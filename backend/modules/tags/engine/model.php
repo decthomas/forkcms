@@ -143,7 +143,7 @@ class BackendTagsModel
 	 */
 	public static function getURL($URL, $id = null)
 	{
-		$URL = (string) $URL;
+		$URL = SpoonFilter::urlise((string) $URL);
 		$language = BL::getWorkingLanguage();
 
 		// get db
@@ -313,7 +313,7 @@ class BackendTagsModel
 		}
 
 		// add to search index
-		if(is_callable(array('BackendSearchModel', 'editIndex'))) BackendSearchModel::editIndex($module, $otherId, array('tags' => implode(' ', (array) $tags)), $language);
+		BackendSearchModel::saveIndex($module, $otherId, array('tags' => implode(' ', (array) $tags)), $language);
 
 		// decrement number
 		foreach($currentTags as $tag => $tagId)

@@ -13,12 +13,12 @@
 
 	<div class="box">
 		<div class="heading">
-			<h3>{$lblContent|ucfirst}</h3>
+			<h3>
+				<label for="text">{$lblContent|ucfirst}</label>
+			</h3>
 		</div>
-		<div class="options">
-			<p>
-				{$txtText} {$txtTextError}
-			</p>
+		<div class="optionsRTE">
+			{$txtText} {$txtTextError}
 		</div>
 	</div>
 

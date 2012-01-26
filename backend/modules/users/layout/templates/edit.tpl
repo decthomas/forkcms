@@ -6,7 +6,7 @@
 </div>
 
 {form:edit}
-	<table class="settingsUserInfo" border="0" cellspacing="0" cellpadding="0">
+	<table class="settingsUserInfo">
 		<tr>
 			<td>
 				<div class="avatar av48">
@@ -16,7 +16,7 @@
 				</div>
 			</td>
 			<td>
-				<table class="infoGrid" border="0" cellspacing="0" cellpadding="0">
+				<table class="infoGrid">
 					<tr>
 						<th>{$lblName|ucfirst}:</th>
 						<td><strong>{$record.settings.name} {$record.settings.surname}</strong></td>
@@ -38,7 +38,7 @@
 		<ul>
 			<li><a href="#tabProfile">{$lblProfile|ucfirst}</a></li>
 			{option:allowPasswordEdit}<li><a href="#tabPassword">{$lblPassword|ucfirst}</a></li>{/option:allowPasswordEdit}
-			<li><a href="#tabInterface">{$lblInterface|ucfirst}</a></li>
+			<li><a href="#tabSettings">{$lblSettings|ucfirst}</a></li>
 			<li><a href="#tabPermissions">{$lblPermissions|ucfirst}</a></li>
 		</ul>
 
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 
-		<div id="tabInterface">
+		<div id="tabSettings">
 			<div class="subtleBox">
 				<div class="heading">
 					<h3>{$lblInterfacePreferences|ucfirst}</h3>
@@ -98,6 +98,21 @@
 					</p>
 				</div>
 			</div>
+			<div class="subtleBox">
+				<div class="heading">
+					<h3>{$lblCSV|ucfirst}</h3>
+				</div>
+				<div class="options horizontal labelWidthLong">
+					<p>
+						<label for="csvSplitCharacter">{$lblSplitCharacter|ucfirst}</label>
+						{$ddmCsvSplitCharacter} {$ddmCsvSplitCharacterError}
+					</p>
+					<p>
+						<label for="csvLineEnding">{$lblLineEnding|ucfirst}</label>
+						{$ddmCsvLineEnding} {$ddmCsvLineEndingError}
+					</p>
+				</div>
+			</div>
 		</div>
 
 		{option:allowPasswordEdit}
@@ -111,7 +126,7 @@
 						<label for="newPassword">{$lblPassword|ucfirst}</label>
 						{$txtNewPassword} {$txtNewPasswordError}
 					</p>
-					<table id="passwordStrengthMeter" class="passwordStrength" data-id="newPassword" cellspacing="0">
+					<table id="passwordStrengthMeter" class="passwordStrength" data-id="newPassword">
 						<tr>
 							<td class="strength" id="passwordStrength">
 								<p class="strength none">/</p>
@@ -157,11 +172,11 @@
 	</div>
 
 	<div class="fullwidthOptions">
-		{option:deleteAllowed}
+		{option:showUsersDelete}
 			<a href="{$var|geturl:'delete'}&amp;id={$record.id}" data-message-id="confirmDelete" class="askConfirmation button linkButton icon iconDelete">
 				<span>{$lblDelete|ucfirst}</span>
 			</a>
-		{/option:deleteAllowed}
+		{/option:showUsersDelete}
 
 		<div class="buttonHolderRight">
 			<input id="editButton" class="inputButton button mainButton" type="submit" name="edit" value="{$lblSave|ucfirst}" />

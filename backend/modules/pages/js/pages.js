@@ -93,7 +93,7 @@ jsBackend.pages.extras =
 		var visible = blockVisibility.attr('checked');
 
 		// add visual representation of block to template visualisation
-		jsBackend.pages.extras.addBlockVisual(selectedPosition, index, selectedExtraId, visible);
+		var addedVisual = jsBackend.pages.extras.addBlockVisual(selectedPosition, index, selectedExtraId, visible);
 
 		// block/widget = don't show editor
 		if(typeof extrasById != 'undefined' && typeof extrasById[selectedExtraId] != 'undefined') $('.blockContentHTML', block).hide();
@@ -103,11 +103,16 @@ jsBackend.pages.extras =
 
 		// reset block indexes
 //		jsBackend.pages.extras.resetIndexes();
+
+		return addedVisual ? index : false;
 	},
 
 	// add block visual on template
 	addBlockVisual: function(position, index, extraId, visible)
 	{
+		// check if the extra is valid
+		if(extraId != 0 && typeof extrasById[extraId] == 'undefined') return false;
+
 		// block
 		if(extraId != 0)
 		{
@@ -146,6 +151,8 @@ jsBackend.pages.extras =
 
 		// mark as updated
 		jsBackend.pages.extras.updatedBlock($('.templatePositionCurrentType[data-block-id=' + index + ']'));
+
+		return true;
 	},
 
 	// delete a linked block
@@ -180,7 +187,7 @@ jsBackend.pages.extras =
 		$('#blockHtml' + index).parent().parent().parent().after('<div id="blockPlaceholder"></div>');
 
 		// show dialog
-		$('#blockHtml' + index).parent().parent().parent().dialog(
+		$('#blockHtml').dialog(
 		{
 			closeOnEscape: false,
 			draggable: false,
@@ -188,12 +195,16 @@ jsBackend.pages.extras =
 			modal: true,
 			width: 940,
 			title: '{$lblEditor|ucfirst}',
+			position: 'center',
 			buttons:
 			{
 				'{$lblOK|ucfirst}': function()
 				{
+					// grab the content
+					var content = $('#html').val();
+
 					// save content
-					jsBackend.pages.extras.setContent(index, null);
+					jsBackend.pages.extras.setContent(index, content);
 
 					// edit content = template is no longer original
 					jsBackend.pages.template.original = false;
@@ -224,11 +235,21 @@ jsBackend.pages.extras =
 
 				// remove placeholder
 				blockPlaceholder.remove();
+			},
+			// jQuery's dialog & CKEditor don't play nicely!
+			open: function()
+			{
+				// reload the editors
+				jsBackend.ckeditor.destroy();
+				jsBackend.ckeditor.load();
+
+				// resize the editor, so we have space to edit the content
+				CKEDITOR.instances['html'].resize('100%', 375);
+
+				// set content in editor
+				$('#html').val(previousContent);
 			}
 		});
-
-		// add editor
-		tinyMCE.execCommand('mceAddControl', true, 'blockHtml' + index);
 	},
 
 	// hide fallback
@@ -340,17 +361,10 @@ jsBackend.pages.extras =
 	},
 
 	// save/reset the content
-	setContent: function(index, previousContent)
+	setContent: function(index, content)
 	{
-		// content does not need to be saved
-		if(previousContent != null)
-		{
-			// reset to previous content
-			tinyMCE.get('blockHtml' + index).setContent(previousContent);
-		}
-
-		// remove editor
-		tinyMCE.execCommand('mceRemoveControl', true, 'blockHtml' + index);
+		// the content to set
+		if(content != null) $('#blockHtml' + index).val(content);
 
 		// add short description to visual representation of block
 		var description = utils.string.stripTags($('#blockHtml' + index).val()).substr(0, 200);
@@ -432,14 +446,23 @@ jsBackend.pages.extras =
 				{
 					'{$lblOK|ucfirst}': function()
 					{
+						// fetch the selected extra id
+						var selectedExtraId = $('#extraExtraId').val();
+
 						// add the extra
-						jsBackend.pages.extras.addBlock($('#extraExtraId').val(), position);
+						var index = jsBackend.pages.extras.addBlock(selectedExtraId, position);
 
 						// add a block = template is no longer original
 						jsBackend.pages.template.original = false;
 
 						// close dialog
 						$(this).dialog('close');
+
+						// if the added block was an editor, show the editor immediately
+						if(index && !(typeof extrasById != 'undefined' && typeof extrasById[selectedExtraId] != 'undefined'))
+						{
+							$('.templatePositionCurrentType[data-block-id=' + index + '] .showEditor').click();
+						}
 					},
 					'{$lblCancel|ucfirst}': function()
 					{
@@ -659,8 +682,11 @@ jsBackend.pages.template =
 		newDefaults = new Array();
 
 		// check if this default block has been changed
-		if(current != old)
+		if(current != old || (typeof initDefaults != 'undefined' && initDefaults))
 		{
+			// this is a variable indicating that the add-action may initially set default blocks
+			if(typeof initDefaults != 'undefined') initDefaults = false;
+
 			// loop positions in new template
 			for(var position in current.data.default_extras)
 			{
@@ -674,7 +700,7 @@ jsBackend.pages.template =
 					var existingBlock = null;
 
 					// find existing block sent to default
-					var existingBlock = $('input[id^=blockPosition][value=fallback]').parent().find('input[id^=blockExtraId][value=' + extraId + ']').parent();
+					var existingBlock = $('input[id^=blockPosition][value=fallback]:not(#blockPosition0)').parent().find('input[id^=blockExtraId][value=' + extraId + ']').parent();
 
 					// if this block did net yet exist, add it
 					if(existingBlock.length == 0) newDefaults.push(new Array(extraId, position));
@@ -711,7 +737,10 @@ jsBackend.pages.template =
 			}
 
 			// add visual representation of block to template visualisation
-			jsBackend.pages.extras.addBlockVisual(position, index, extraId, visible);
+			added = jsBackend.pages.extras.addBlockVisual(position, index, extraId, visible);
+
+			// if the visual could be not added, remove the content entirely
+			if(!added) $(this).remove();
 		});
 
 		// reset block indexes
@@ -928,7 +957,7 @@ jsBackend.pages.tree =
 					if(jsBackend.debug) alert(textStatus);
 
 					// show message
-					jsBackend.messages.add('error', '{$errCantBeMoved|addslashes}');
+					jsBackend.messages.add('error', '{$errCantBeMoved}');
 
 					// rollback
 					$.tree.rollback(rollback);
@@ -936,7 +965,7 @@ jsBackend.pages.tree =
 				else
 				{
 					// show message
-					jsBackend.messages.add('success', '{$msgPageIsMoved|addslashes}'.replace('%1$s', json.data.title));
+					jsBackend.messages.add('success', '{$msgPageIsMoved}'.replace('%1$s', json.data.title));
 				}
 			}
 		});
